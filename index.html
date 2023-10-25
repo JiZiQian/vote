@@ -35,13 +35,21 @@
                 back[pre[id]]=id;
                 back[nid]=back[id];
                 back[id]=nid;
-                mswap(document.getElementById(id.toString()),document.getElementById(nid.toString()))
+                mswap(document.getElementById(id.toString()),document.getElementById(nid.toString()));
             }
+        }
+        function  showRes(){
+            var str='';
+            for(var i=0;i<20;i++){
+                str+=(i+1).toString()+'班'+ups[i].toString()+'票 ';
+            }
+            alert(str);
         }
     </script>
 </head>
 <body>
     <h1>投票</h1>
+    <button onclick="showRes()">显示结果</button>
     <div id="bts"></div>
     <div id="tmsort"></div>
     <script>
@@ -55,7 +63,7 @@
         var tmsort=document.getElementById('tmsort');
         for(var i=0;i<teams.length;i++){
             bts.innerHTML+='<button onclick=add('+i.toString()+')>'+teams[i]+'</button>';
-            tmsort.innerHTML+='<p id='+i.toString()+'>'+teams[i]+'0票</p>';
+            tmsort.innerHTML+='<div id='+i.toString()+'>'+teams[i]+'0票</div>';
         }
     </script>
 </body>
