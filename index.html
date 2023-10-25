@@ -40,8 +40,10 @@
         }
         function  showRes(){
             var str='';
-            for(var i=0;i<20;i++){
-                str+=(i+1).toString()+'班'+ups[i].toString()+'票 ';
+            var pos=0;
+            while(back[pos]!=20){
+                str+=pos.toString()+'班'+ups[pos].toString()+'票 ';
+                pos=back[pos];
             }
             alert(str);
         }
