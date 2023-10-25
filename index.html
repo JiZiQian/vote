@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>投票</title>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+        teams=[];
+        ups=[];
+        pre=[];
+        back=[];
+        function mswap(d1,d2){
+            var d11=$('<hr/>');
+            var d22=$('<hr/>');
+            $(d1).before(d11);
+            $(d2).before(d22);
+            $(d22).after(d1);
+            $(d11).after(d2);
+            $(d11).remove();
+            $(d22).remove();
+        }
+        function add(id){
+            ups[id]++;
+            document.getElementById(id.toString()).innerText=(id+1).toString()+'班';
+            var str='';
+            for(var i=1;i<=ups[id];i++) str+='|';
+            document.getElementById(id.toString()).innerText+=str+ups[id].toString()+'票';
+            while(pre[id]!=-1){
+                var nid=pre[id];
+                if(ups[nid]>=ups[id]) break;
+                pre[id]=pre[nid];
+                pre[nid]=id;
+                pre[back[id]]=nid;
+                back[pre[id]]=id;
+                back[nid]=back[id];
+                back[id]=nid;
+                mswap(document.getElementById(id.toString()),document.getElementById(nid.toString()))
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>投票</h1>
+    <div id="bts"></div>
+    <div id="tmsort"></div>
+    <script>
+        for(var i=1;i<=20;i++){
+            teams.push(i.toString()+'班');
+            ups.push(0);
+            pre.push(i-2);
+            back.push(i);
+        }
+        var bts=document.getElementById('bts');
+        var tmsort=document.getElementById('tmsort');
+        for(var i=0;i<teams.length;i++){
+            bts.innerHTML+='<button onclick=add('+i.toString()+')>'+teams[i]+'</button>';
+            tmsort.innerHTML+='<p id='+i.toString()+'>'+teams[i]+'0票</p>';
+        }
+    </script>
+</body>
+</html>
