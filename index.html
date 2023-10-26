@@ -10,6 +10,7 @@
         ups=[];
         pre=[];
         back=[];
+        var head=0;
         function mswap(d1,d2){
             var d11=$('<hr/>');
             var d22=$('<hr/>');
@@ -37,12 +38,13 @@
                 back[id]=nid;
                 mswap(document.getElementById(id.toString()),document.getElementById(nid.toString()));
             }
+            if(pre[id]==-1) head=id;
         }
         function  showRes(){
             var str='';
-            var pos=0;
-            while(back[pos]!=20){
-                str+=pos.toString()+'班'+ups[pos].toString()+'票 ';
+            var pos=head;
+            while(pos!=20){
+                str+=(pos+1).toString()+'班'+ups[pos].toString()+'票 ';
                 pos=back[pos];
             }
             alert(str);
